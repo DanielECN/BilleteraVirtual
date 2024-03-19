@@ -3,8 +3,9 @@
  */
 
 import cl.billeteraVirtualBootcamp.clases.Cliente;
-import cl.billeteraVirtualBootcamp.clases.Cuenta;
 
+//Esto lo borrare eventualmente porque el codigo se ha ido actualizando, al igual que lo que esta abajo al ultimo
+import cl.billeteraVirtualBootcamp.clases.Cuenta;
 import java.util.Scanner;
 
 /**
