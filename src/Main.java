@@ -5,6 +5,7 @@
 import cl.billeteraVirtualBootcamp.clases.Cliente;
 
 //Esto lo borrare eventualmente porque el codigo se ha ido actualizando, al igual que lo que esta abajo al ultimo
+//Para ir probando a ver que sucede realmente
 import cl.billeteraVirtualBootcamp.clases.Cuenta;
 import java.util.Scanner;
 
