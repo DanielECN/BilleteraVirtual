@@ -1,11 +1,12 @@
 /**
- * Importación de la clase Cliente y Cuenta que se encuentra dentro del paquete de clases
+ * Importación de la clase Cliente y Cuenta que se encuentra dentro del paquete de clases.
  */
 
 import cl.billeteraVirtualBootcamp.clases.Cliente;
 
 //Esto lo borrare eventualmente porque el codigo se ha ido actualizando, al igual que lo que esta abajo al ultimo
 //Para ir probando a ver que sucede realmente
+
 import cl.billeteraVirtualBootcamp.clases.Cuenta;
 import java.util.Scanner;
 
@@ -13,6 +14,9 @@ import java.util.Scanner;
  * Clase main, la principal, sin esta clase no puede existir nuestro programa, esta ejecutara todo
  */
 public class Main {
+    /**
+     * Nuestro metodo main, recomendable para cualquier proyecto java
+     */
     public static void main(String[] args) {
 
         Cliente cliente = Cliente.crearClienteDesdeConsola();
@@ -23,28 +27,16 @@ public class Main {
 }
 
 
+/**
+ * Codigo antiguo, eventualmente se eliminara, solo esta para Mi por propositos academicos y torpedos
+ * Estos datos se setearan mediante un constructor
+ */
+/*
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/*        // Esto ya es un objeto
+        // Esto ya es un objeto
         Scanner scanner = new Scanner(System.in);
         Cuenta cuenta = new Cuenta();
- //       Cuenta cuenta2 = new Cuenta(654321, "Yo mismo", 5000);
+        Cuenta cuenta2 = new Cuenta(654321, "Yo mismo", 5000);
 
         //Llenando la clase de datos
 
@@ -54,8 +46,6 @@ public class Main {
 
         System.out.println("Nombre del titular cuenta: " + cuenta.getTitularCuenta());
 
-
-
         cuenta.mostrarInformacionCuentaCorriente();
-//        cuenta2.mostrarInformacionCuentaCorriente();*/
+        cuenta2.mostrarInformacionCuentaCorriente();*/
 
