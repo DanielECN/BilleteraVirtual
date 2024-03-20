@@ -13,7 +13,7 @@ public class Cuenta {
      * 1) ATRIBUTOS DE UNA CLASE
      *
      * Atributos principales de mi clase que contiene las variables numeroCuenta, saldoCuenta y titularCuenta con sus
-     * respectivos MODIFICADORES DE ACCESO(publico, privado, protegido) que en esta caso seran todos private
+     * respectivos MODIFICADORES DE ACCESO(publico, privado, protegido) que en este caso seran todos private
      */
 
     private int numeroCuenta;
@@ -88,8 +88,6 @@ public class Cuenta {
      * 4) Metodos de comportamiento
      */
 
-    ////////////////////////////////////// CrearCuenta //////////////////////////////////////////////////////
-
     /**
      * Metodo de comportamiento para visualizar los datos de mi cuenta.
      * Se hace un string formatoSaldo y se llama la función formatearSaldo(saldoCuenta) para mostrar un numero
@@ -97,7 +95,6 @@ public class Cuenta {
      */
 
     public void mostrarInformacionCuentaCorriente() {
-
 
         String formatoSaldo = formatearSaldo(saldoCuenta);
 
@@ -107,9 +104,60 @@ public class Cuenta {
         System.out.println("Saldo de cuenta: $" + formatoSaldo);
         System.out.println("------------------------------------");
     }
+
+    /////////////////////////////////////// AgregarSaldo //////////////////////////////////////
+
     /**
-     *     //////////////////////////////////////// AgregarSaldo //////////////////////////////////////
-     *     //////////////////////////////////////// RestarSaldo //////////////////////////////////////
+     * Metodo para sumar el saldo, donde le digo que si la cantidad es mayor a 0, al saldo le sume la cantidad
+     * indicada por el usuario, si es menor a 0 enviara un mensaje(que debe ser mayor), la cantidad ingresada
+     * tiene formato para que sea mas legible el numero, luego mostrara el saldo actual y finalmente la informacion
+     * completa de la cuenta actualizada.
+     */
+    public void ingresarDinero() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese cantidad dinero para agregar a su saldo: ");
+
+        double cantidad = scanner.nextDouble();
+
+        String formatoCantidad = formatearSaldo(cantidad);
+
+        if (cantidad > 0) {
+            saldoCuenta += cantidad;
+            System.out.println("Se han ingresado $" + formatoCantidad + " a la cuenta.");
+            System.out.println("Saldo actual de la cuenta: $" + saldoCuenta);
+            System.out.println("------------------------------------");
+            System.out.println("Mostrando informacion de la cuenta actualizada");
+        } else {
+            System.out.println("La cantidad a ingresar debe ser mayor que cero.");
+        }
+    }
+
+    //////////////////////////////////////// RestarSaldo //////////////////////////////////////
+
+    public void restarDinero() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese cantidad dinero para restar a su saldo: ");
+
+        double restoDinero = scanner.nextDouble();
+
+        String formatoCantidad = formatearSaldo(restoDinero);
+
+        if (restoDinero > 0) {
+            saldoCuenta -= restoDinero;
+            System.out.println("Se han restado $" + formatoCantidad + " a la cuenta.");
+            System.out.println("Saldo actual de la cuenta: $" + saldoCuenta);
+            System.out.println("------------------------------------");
+            System.out.println("Mostrando informacion de la cuenta actualizada");
+        } else {
+            System.out.println("La cantidad a ingresar debe ser mayor que cero.");
+        }
+    }
+
+
+
+    /**
+     *
+     *
      *     //V////////////////////////////////////// VerSaldo //////////////////////////////////////
      *     //////////////////////////////////////// MostrarInformacion //////////////////////////////////////
      *     //C////////////////////////////////////// ConversorMoneda //////////////////////////////////////

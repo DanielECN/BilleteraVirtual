@@ -19,8 +19,26 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        // crea el cliente desde la clase Cliente y muestra la informacion de la cuenta.
         Cliente cliente = Cliente.crearClienteDesdeConsola();
         cliente.getCuentaCorriente().mostrarInformacionCuentaCorriente();
+
+        //llamo al metodo ingresar dinero para sumar dinero al saldo y muestro nuevamente la informacion de la cuenta para ver si se agrego correctamente.
+        cliente.getCuentaCorriente().ingresarDinero();
+        cliente.getCuentaCorriente().mostrarInformacionCuentaCorriente();
+
+
+        //llamo al metodo para restar dinero al saldo y muestro la informacion de la cuenta para ver si se resto correctamente.
+
+        cliente.getCuentaCorriente().restarDinero();
+        cliente.getCuentaCorriente().mostrarInformacionCuentaCorriente();
+
+
+
+
+
+
+
 
 
     }
