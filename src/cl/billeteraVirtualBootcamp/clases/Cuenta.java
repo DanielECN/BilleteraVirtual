@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
+ * @author Daniel Cerda
+
  * Mi clase principal cuenta, de donde podre manipular los datos del titular(String),
  * numero de cuenta(int), saldo(double)
  */
@@ -11,7 +13,6 @@ public class Cuenta {
 
     /**
      * 1) ATRIBUTOS DE UNA CLASE
-     *
      * Atributos principales de mi clase que contiene las variables numeroCuenta, saldoCuenta y titularCuenta con sus
      * respectivos MODIFICADORES DE ACCESO(publico, privado, protegido) que en este caso seran todos private
      */
@@ -27,8 +28,9 @@ public class Cuenta {
      */
     public Cuenta() {
     }
-    public Cuenta(int numeroCuentaCuenta, String titular, double saldo) {
-        this.numeroCuenta = numeroCuentaCuenta;
+
+    public Cuenta(int numeroCuenta, String titular, double saldo) {
+        this.numeroCuenta = numeroCuenta;
         this.titularCuenta = titular;
         this.saldoCuenta = saldo;
     }
@@ -39,7 +41,7 @@ public class Cuenta {
      * constructores asegurando que el usuario siga una ruta especifica para acceder a la información.
      */
 
-    public static Cuenta CrearCuentaCorrientePorConsola(String nombreCliente) {
+    public static Cuenta CrearCuentaClientePorConsola(String nombreCliente) {
         Scanner scanner = new Scanner(System.in);
         int numeroCuenta;
         double saldoCuenta;
@@ -59,30 +61,20 @@ public class Cuenta {
      * Getters y setters (que son los metodos de acceso) de mi numero de cuenta, saldo de cuenta y titular de cuenta
      * para poder obtener y modificar los datos
      */
-    public int getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
+    public int getNumeroCuenta() {return numeroCuenta;}
     public void setNumeroCuenta(int numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
-
-    public double getSaldoCuenta() {
-        return saldoCuenta;
-    }
-
+    public double getSaldoCuenta() {return saldoCuenta;}
     public void setSaldoCuenta(double saldoCuenta) {
         this.saldoCuenta = saldoCuenta;
     }
-
     public String getTitularCuenta() {
         return titularCuenta;
     }
-
     public void setTitularCuenta(String titularCuenta) {
         this.titularCuenta = titularCuenta;
     }
-
 
     /**
      * 4) Metodos de comportamiento
@@ -90,42 +82,54 @@ public class Cuenta {
 
     /**
      * Metodo de comportamiento para visualizar los datos de mi cuenta.
-     * Se hace un string formatoSaldo y se llama la función formatearSaldo(saldoCuenta) para mostrar un numero
-     * mas legible.
+     * Se hace un string formatoSaldo y se llama la función formatearSaldo(saldoCuenta) para mostrar un numero mas legible.
+     * Ademas agrego la conversión del saldo en Euros y Dolares sacado de la clase abstracta Moneda para verificar los datos
+     * y lo llamo de las subclases MonedaEnEuro y MonedaEnDolar y para que los digitos sean mas legibles en esos valores  le agrego
+     * el metodo de formatearSaldo al dineroEuro y dineroDolar
      */
 
     public void mostrarInformacionCuentaCorriente() {
 
+        double dineroEuro;
+        double dineroDolar;
+        MonedaEnEuro monedaEnEuro = new MonedaEnEuro();
+        dineroEuro = monedaEnEuro.verificarDatos(saldoCuenta);
+
+        MonedaEnDolar monedaEnDolar = new MonedaEnDolar();
+        dineroDolar = monedaEnDolar.verificarDatos(saldoCuenta);
+
         String formatoSaldo = formatearSaldo(saldoCuenta);
 
-        System.out.println("------------------------------------");
+        System.out.println("-----------------------------------------------------------");
         System.out.println("Numero de cuenta: " + numeroCuenta);
         System.out.println("Titular de cuenta: " + titularCuenta);
-        System.out.println("Saldo de cuenta: $" + formatoSaldo);
-        System.out.println("------------------------------------");
+        System.out.println("Saldo de cuenta: | $" + formatoSaldo + " clp" + "| €" + formatearSaldo(dineroEuro) + " euros " + " | $"+ formatearSaldo(dineroDolar) + " dolares |");
+        System.out.println("-----------------------------------------------------------");
+
     }
-
     /////////////////////////////////////// AgregarSaldo //////////////////////////////////////
-
     /**
      * Metodo para sumar el saldo, donde le digo que si la cantidad es mayor a 0, al saldo le sume la cantidad
      * indicada por el usuario, si es menor a 0 enviara un mensaje(que debe ser mayor), la cantidad ingresada
-     * tiene formato para que sea mas legible el numero, luego mostrara el saldo actual y finalmente la informacion
-     * completa de la cuenta actualizada.
+     * tiene un formato para que sea mas legible el numero, luego mostrara el saldo actual y finalmente la informacion
+     * completa de la cuenta actualizada con sus respectivos saldos en CLP, DOLAR y EURO, que el formato entregado tiene que ser
+     * la cantidad indicada por el usuario dividido por el precio del dolar/euro para que lo muestre correctamente por pantalla.
      */
     public void ingresarDinero() {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese cantidad dinero para agregar a su saldo: ");
 
         double cantidad = scanner.nextDouble();
 
         String formatoCantidad = formatearSaldo(cantidad);
+        String formatoCantidadEuro = formatearSaldo(cantidad/1.061);
+        String formatoCantidadDolar = formatearSaldo(cantidad/976);
 
         if (cantidad > 0) {
             saldoCuenta += cantidad;
-            System.out.println("Se han ingresado $" + formatoCantidad + " a la cuenta.");
-            System.out.println("Saldo actual de la cuenta: $" + saldoCuenta);
-            System.out.println("------------------------------------");
+            System.out.println("Se han ingresado $" + formatoCantidad + " clp" + "| €" + formatoCantidadEuro + " euros " + " | $"+ formatoCantidadDolar + " dolares | a la cuenta.");
+            System.out.println("-----------------------------------------------------------");
             System.out.println("Mostrando informacion de la cuenta actualizada");
         } else {
             System.out.println("La cantidad a ingresar debe ser mayor que cero.");
@@ -134,6 +138,9 @@ public class Cuenta {
 
     //////////////////////////////////////// RestarSaldo //////////////////////////////////////
 
+    /**
+     * Lo mismo que el metodo de sumar saldo, solo que ahora se le resta y muestra la informacion por pantalla
+     */
     public void restarDinero() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese cantidad dinero para restar a su saldo: ");
@@ -141,29 +148,22 @@ public class Cuenta {
         double restoDinero = scanner.nextDouble();
 
         String formatoCantidad = formatearSaldo(restoDinero);
+        String formatoCantidadEuro = formatearSaldo(restoDinero/1.061);
+        String formatoCantidadDolar = formatearSaldo(restoDinero/976);
 
         if (restoDinero > 0) {
             saldoCuenta -= restoDinero;
-            System.out.println("Se han restado $" + formatoCantidad + " a la cuenta.");
-            System.out.println("Saldo actual de la cuenta: $" + saldoCuenta);
-            System.out.println("------------------------------------");
+            System.out.println("Se han restado $" + formatoCantidad + " clp" + "| €" + formatoCantidadEuro + " euros " + " | $"+ formatoCantidadDolar + " dolares | a la cuenta.");
+            System.out.println("-----------------------------------------------------------");
             System.out.println("Mostrando informacion de la cuenta actualizada");
         } else {
             System.out.println("La cantidad a ingresar debe ser mayor que cero.");
         }
     }
 
-
-
     /**
-     *
-     *
-     *     //V////////////////////////////////////// VerSaldo //////////////////////////////////////
-     *     //////////////////////////////////////// MostrarInformacion //////////////////////////////////////
-     *     //C////////////////////////////////////// ConversorMoneda //////////////////////////////////////
      *     //////////////////////////////////////// Menu //////////////////////////////////////
      */
-
 
     /**
      * 5) OPCIONAL "Metodos  utilitarios de logica"
