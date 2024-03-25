@@ -123,8 +123,8 @@ public class Cuenta {
         double cantidad = scanner.nextDouble();
 
         String formatoCantidad = formatearSaldo(cantidad);
-        String formatoCantidadEuro = formatearSaldo(cantidad/1.061);
-        String formatoCantidadDolar = formatearSaldo(cantidad/976);
+        String formatoCantidadEuro = formatearSaldo(cantidad/MonedaEnEuro.VALOR_EURO);
+        String formatoCantidadDolar = formatearSaldo(cantidad/MonedaEnDolar.VALOR_DOLAR);
 
         if (cantidad > 0) {
             saldoCuenta += cantidad;
@@ -148,8 +148,8 @@ public class Cuenta {
         double restoDinero = scanner.nextDouble();
 
         String formatoCantidad = formatearSaldo(restoDinero);
-        String formatoCantidadEuro = formatearSaldo(restoDinero/1.061);
-        String formatoCantidadDolar = formatearSaldo(restoDinero/976);
+        String formatoCantidadEuro = formatearSaldo(restoDinero/MonedaEnEuro.VALOR_EURO);
+        String formatoCantidadDolar = formatearSaldo(restoDinero/MonedaEnDolar.VALOR_DOLAR);
 
         if (restoDinero > 0) {
             saldoCuenta -= restoDinero;

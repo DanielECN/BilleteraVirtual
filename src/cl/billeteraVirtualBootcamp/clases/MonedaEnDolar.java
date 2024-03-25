@@ -5,7 +5,6 @@ public class MonedaEnDolar extends Moneda{
     @Override
     protected double verificarDatos(double dinero) {
         if (dinero > 0){
-
             this.dineroEnDolares = dinero/VALOR_DOLAR;
             return dineroEnDolares;
         }
